@@ -1,4 +1,5 @@
 """Restaurant rating lister."""
+from random import choice
 scores = {}
 
 
@@ -16,8 +17,6 @@ def add_rating():
     rating = False
     while rating == False:
         rating = validate_rating(input("Please enter the rating? "))
-        print(rating)
-
     scores[restaurant] = rating
 
 
@@ -37,13 +36,31 @@ def validate_rating(rating):
         return False
 
 
-restaurant_ratings('scores.txt')
-command = input('Please enter a command: Show, Add, or Quit? ').capitalize
+def update_ratings():
+    restaurant = choice(list(scores.keys()))
+    print(f"{restaurant} is rated at {scores[restaurant]}.")
+    rating = False
+    while rating == False:
+        rating = validate_rating(input("Please enter the rating? "))
+    scores[restaurant] = rating
 
-while command != 'Quit':
-    if command == 'Show':
-        show_ratings()
-    elif command == 'Add':
-        add_rating()
-    command = input('Please enter a command: Show, Add, or Quit? ')
-print('Goodbye!')
+
+def main():
+    restaurant_ratings('scores.txt')
+    command = input(
+        'Please enter a command: Show, Add, Update or Quit? ').capitalize()
+
+    while command != 'Quit':
+        if command == 'Show':
+            show_ratings()
+        elif command == 'Add':
+            add_rating()
+        elif command == 'Update':
+            update_ratings()
+        command = input(
+            'Please enter a command: Show, Add, Update or Quit? ').capitalize()
+    print('Goodbye!')
+
+
+if __name__ == '__main__':
+    main()
