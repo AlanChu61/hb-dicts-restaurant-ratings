@@ -37,11 +37,19 @@ def validate_rating(rating):
 
 
 def update_ratings():
-    restaurant = choice(list(scores.keys()))
-    print(f"{restaurant} is rated at {scores[restaurant]}.")
-    rating = False
-    while rating == False:
-        rating = validate_rating(input("Please enter the rating? "))
+    option = input(
+        "Please enter the restaurant name? or type 'random' for a random restaurant. ").lower()
+    if option == 'random':
+        restaurant = choice(list(scores.keys()))
+        print(f"{restaurant} is rated at {scores[restaurant]}.")
+        rating = False
+        while rating == False:
+            rating = validate_rating(input("Please enter the rating? "))
+    elif restaurant in scores.keys():
+        print(f"{restaurant} is rated at {scores[restaurant]}.")
+        rating = False
+        while rating == False:
+            rating = validate_rating(input("Please enter the rating? "))
     scores[restaurant] = rating
 
 
