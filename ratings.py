@@ -37,6 +37,13 @@ def validate_rating(rating):
         return False
 
 
-add_rating()
 restaurant_ratings('scores.txt')
-show_ratings()
+command = input('Please enter a command: Show, Add, or Quit? ').capitalize
+
+while command != 'Quit':
+    if command == 'Show':
+        show_ratings()
+    elif command == 'Add':
+        add_rating()
+    command = input('Please enter a command: Show, Add, or Quit? ')
+print('Goodbye!')
